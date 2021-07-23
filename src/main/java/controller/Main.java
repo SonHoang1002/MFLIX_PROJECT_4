@@ -24,6 +24,6 @@ public class Main {
 
         List<Movie> list = new ArrayList<>();
 
-        movies.find().limit(6).forEach(d -> System.out.println(d.toJson()));
+        movies.find().limit(10).forEach(d -> System.out.println(d.toJson()));
     }
 }
