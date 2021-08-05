@@ -1,8 +1,11 @@
 package controller;
 
+import com.mongodb.client.FindIterable;
+import model.Comment;
 import model.Movie;
 import org.thymeleaf.ITemplateEngine;
 import org.thymeleaf.context.WebContext;
+import service.CommentService;
 import service.MovieService;
 
 import javax.servlet.ServletContext;
@@ -17,8 +20,10 @@ public class MovieController implements IController {
         String id = request.getParameter("id");
         Movie movie = new MovieService().getMovieByID(id);
         ctx.setVariable("movie", movie);
-        List<String> genres = new MovieService().getGenresforHeader();
-        ctx.setVariable("genres", genres);
+
+        FindIterable<Comment> comments = new CommentService().getComments("movie_id", movie.getId());
+        ctx.setVariable("comments", comments);
+
         templateEngine.process("movie", ctx, response.getWriter());
     }
 }

@@ -1,4 +1,3 @@
-
 package filter;
 
 import application.MyApplication;
